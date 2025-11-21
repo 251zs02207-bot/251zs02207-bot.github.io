@@ -3,14 +3,20 @@
 -------------------- */
 
 :root {
-  --theme-color: #0096a7; /* 少し落ち着いた色味に */
+  --color-primary: #2563eb;   /* 見出し・強調用のブルー */
+  --color-accent:  #f97316;   /* ポイントで使うアクセントカラー */
+  --color-text:    #1f2933;
+  --color-bg:      #f3f4f6;
+  --color-card:    #ffffff;
+  --color-border:  #e5e7eb;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
 }
@@ -20,28 +26,30 @@ body {
   padding: 40px 24px;
   max-width: 960px;          /* 横幅を少し絞って中央寄せ */
   margin-inline: auto;
-  color: #333;
+  color: var(--color-text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-               "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN",
-               "Yu Gothic", "游ゴシック体", sans-serif;
+    "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", "游ゴシック体", sans-serif;
   line-height: 1.8;
-  background: #f7fafb;       /* 背景をほんのりグレーに */
+  background: var(--color-bg);
 }
 
 /* --------------------
       見出し
 -------------------- */
 
-h1, h2, h3 {
-  color: var(--theme-color);
-  border-bottom: dashed 0.12em var(--theme-color);
-  padding-bottom: 0.3em;
+h1,
+h2,
+h3 {
+  color: var(--color-primary);
+  border-bottom: 2px solid rgba(37, 99, 235, 0.18);
+  padding-bottom: 0.4em;
   margin-top: 2.2rem;
   margin-bottom: 1rem;
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 2.1rem;
   letter-spacing: 0.08em;
 }
 
@@ -51,7 +59,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   letter-spacing: 0.03em;
 }
 
@@ -60,14 +68,14 @@ h3 {
 -------------------- */
 
 a {
-  color: var(--theme-color);
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
 }
 
 a:hover {
   text-decoration: underline;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 /* --------------------
@@ -81,14 +89,14 @@ ul {
 }
 
 li {
-  margin: 0.25rem 0;
-  padding-left: 1.1em;
+  margin: 0.3rem 0;
+  padding-left: 1.3em;
   position: relative;
 }
 
 li::before {
-  content: "★";
-  color: var(--theme-color);
+  content: "▸";                 /* 星から三角マークに変更 */
+  color: var(--color-accent);   /* アクセントカラーでちょっとおしゃれに */
   position: absolute;
   left: 0;
   top: 0.1em;
@@ -102,31 +110,58 @@ li::before {
 table {
   border-spacing: 0;
   border-collapse: collapse;
-  min-width: 70%;
+  width: 100%;
   margin-top: 1rem;
-  border-radius: 8px;
+  background-color: var(--color-card);
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-  background-color: #fff;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--color-border);
 }
 
-tr {
-  background-color: #fff;
-}
-
-tr:nth-child(2n) {
-  background-color: #f9fbfc;
+th,
+td {
+  padding: 0.7rem 0.9rem;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
 }
 
 th {
-  background: var(--theme-color);
+  background: var(--color-primary);
   color: #fff;
   text-align: left;
   font-weight: 600;
 }
 
-th, td {
-  border: solid 1px #e4eef2;
-  padding: 0.6rem 0.8rem;
-  font-size: 0.95rem;
+tr:last-child th,
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* 行ごとにベタ塗り背景はつけない
+   → 画像の後ろに色の帯が広がらないようにする */
+
+/* テーブル内の画像の見た目調整 */
+table img {
+  max-width: 160px;      /* 画像が大きくなりすぎないように */
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* スマホ対応（幅が狭いときに余白を少し調整） */
+@media (max-width: 600px) {
+  body {
+    padding: 24px 16px;
+  }
+
+  th,
+  td {
+    padding: 0.6rem 0.6rem;
+  }
+
+  table img {
+    max-width: 120px;
+  }
 }
